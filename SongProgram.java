@@ -18,41 +18,55 @@ public class SongProgram {
     // HashMap to store SongRecords with the song's ID as the key
     private HashMap<String, SongRecord> songMap;
 
-    // Constructor
+    // Constructor initializes the songMap as a new HashMap
     public SongProgram() {
         songMap = new HashMap<>();
     }
 
-    // Method to load songs from a CSV file
+    /** 
+     * Method to load songs from a CSV file
+     * precondition: The CSV file contains appropriate song data.
+     * postcondition: The songMap contains all songs from the CSV file.
+     * @param filePath the path to the CSV file
+     * @throws IOException if an error occurs while reading the file
+     * This method reads the CSV file, creates SongRecord 
+     *    objects, and stores them in the songMap.
+     */
     public void loadSongsFromCSV(String filePath) {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-            String line;
+            String line; //line is declared but not initialized as to read the lines of the CSV file
             
             //read in first line and do nothing with it
             br.readLine();
             
-            while ((line = br.readLine()) != null) {
+            while ((line = br.readLine()) != null) { //when the line is not null, will create a new SongRecord
             	
             	//System.out.println(line);//for testing
                 // Create a SongRecord from the line and add it to the map
-                SongRecord song = new SongRecord(line);
-                songMap.put(song.getId(), song);
+                SongRecord song = new SongRecord(line); //songRecord constructor takes a line of CSV
+                songMap.put(song.getId(), song); //song gets the ID and puts it in the map
             }
-            System.out.println("Songs successfully loaded from CSV.");
+            System.out.println("Songs successfully loaded from CSV."); //the song was successfully created
         } catch (IOException e) {
-            System.err.println("Error reading CSV file: " + e.getMessage());
+            System.err.println("Error reading CSV file: " + e.getMessage()); //otherwise, the file was not read
         }
     }
 
-    // Method to retrieve a SongRecord by ID
+    /** 
+     * Method to retrieve a SongRecord by ID that was recorded in the hashMap
+     * precondition: The songMap HashMap is correctly filled with song objects and their IDs.
+     * postcondition: The requested song is returned
+     * @param id the ID of the song to retrieve
+     * @return the song object associated with the given ID, or null if not found
+     */
     public SongRecord getSongById(String id) {
         return songMap.get(id);
     }
 
     // Method to print all songs (for debugging or display purposes)
     public void printAllSongs() {
-        for (SongRecord song : songMap.values()) {
-            System.out.println(song);
+        for (SongRecord song : songMap.values()) { //enhanced for loop to iterate through the values of the songMap
+            System.out.println(song); //prints out the song of each ID from the map
         }
     }
     
