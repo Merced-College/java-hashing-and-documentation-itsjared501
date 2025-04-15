@@ -13,6 +13,11 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 
+/**
+ * SongProgram.java is a program that uses a CSV file to create a HashMap of SongRecord objects.
+ *   Users can search the desired song by ID. A GUI is provided for user interaction,
+ *   but is not required for the program to function.
+ */
 public class SongProgram {
 
     // HashMap to store SongRecords with the song's ID as the key
